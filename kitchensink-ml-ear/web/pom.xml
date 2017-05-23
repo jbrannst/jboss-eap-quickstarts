@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     JBoss, Home of Professional Open Source
     Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
@@ -19,40 +19,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>jboss-kitchensink-ml-ear</artifactId>
-        <groupId>org.jboss.quickstarts.eap</groupId>
-        <version>7.1.0-SNAPSHOT</version>
+        <groupId>org.jboss.eap.quickstarts</groupId>
+        <artifactId>kitchensink-ml-ear</artifactId>
+        <version>7.1.0.Alpha</version>
     </parent>
-    <artifactId>jboss-kitchensink-ml-ear-web</artifactId>
+    <artifactId>kitchensink-ml-ear-web</artifactId>
     <packaging>war</packaging>
-    <name>JBoss EAP Quickstart: kitchensink-ml-ear - web</name>
+    <name>${qs.name.prefix} kitchensink-ml-ear - web</name>
     <description>This project demonstrates how to create a localized version of the kitchensink EAR; this is the web POM file</description>
-    <url>http://www.jboss.org/products/eap</url>
 
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <distribution>repo</distribution>
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
     <dependencies>
-
-        <!-- Dependency on the EJB module so we can use it's services if needed -->
-        <dependency>
-            <groupId>org.jboss.quickstarts.eap</groupId>
-            <artifactId>jboss-kitchensink-ml-ear-ejb</artifactId>
-            <type>ejb</type>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss EAP -->
-        <dependency>
-            <groupId>org.jboss.spec.javax.ws.rs</groupId>
-            <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
 
         <!-- Import the CDI API, we use provided scope as the API is included in JBoss EAP -->
         <dependency>
@@ -61,11 +45,19 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Import the JSF API, we use provided scope as the API is included in JBoss EAP -->
+        <!-- Bean Validation Implementation 
+             Provides portable constraints such as @Email 
+             Hibernate Validator is shipped in JBoss EAP -->
         <dependency>
-            <groupId>org.jboss.spec.javax.faces</groupId>
-            <artifactId>jboss-jsf-api_2.2_spec</artifactId>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Import the JPA API, we use provided scope as the API is included in JBoss EAP -->
@@ -90,35 +82,28 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Bean Validation Implementation 
-             Provides portable constraints such as @Email 
-             Hibernate Validator is shipped in JBoss EAP -->
+        <!-- Dependency on the EJB module so we can use it's services if needed -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
+            <groupId>org.jboss.eap.quickstarts</groupId>
+            <artifactId>kitchensink-ml-ear-ejb</artifactId>
+            <type>ejb</type>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+
+        <!-- Import the JSF API, we use provided scope as the API is included in JBoss EAP -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.faces</groupId>
+            <artifactId>jboss-jsf-api_2.2_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss EAP -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
-
-    <build>
-        <finalName>${project.artifactId}</finalName>
-        <plugins>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${version.war.plugin}</version>
-                <configuration>
-                    <!-- Java EE doesn't require web.xml, Maven needs to catch up! -->
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

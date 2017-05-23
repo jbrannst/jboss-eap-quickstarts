@@ -1,16 +1,15 @@
-helloworld-mdb-propertysubstitution: MDB (Message-Driven Bean) Using Property Substitution
-============================================================
+# helloworld-mdb-propertysubstitution: MDB (Message-Driven Bean) Using Property Substitution
+
 Author: Serge Pagop, Andy Taylor, Jeff Mesnil  
 Level: Intermediate  
 Technologies: JMS, EJB, MDB  
 Summary: The `helloworld-mdb-propertysubstitution` quickstart demonstrates the use of *JMS* and *EJB MDB*, enabling property substitution with annotations.  
 Target Product: JBoss EAP  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts/>  
+Source: <https://github.com/jbossas/eap-quickstarts/>  
 
-What is it?
------------
+## What is it?
 
-The `helloworld-mdb-propertysubstitution` quickstart demonstrates the use of *JMS* and *EJB Message-Driven Bean* in Red Hat JBoss Enterprise Application Platform. 
+The `helloworld-mdb-propertysubstitution` quickstart demonstrates the use of *JMS* and *EJB Message-Driven Bean* in Red Hat JBoss Enterprise Application Platform.
 
 It is based on the [helloworld-mdb](../helloworld-mdb/README.md) quickstart, but has been enhanced to enable property substitution using the `@Resource` and `@ActivationConfigProperty` annotations.
 
@@ -20,34 +19,31 @@ This project creates two JMS resources:
 * A topic named `HELLOWORLDMDBTopic` bound in JNDI as `java:/${property.helloworldmdb.topic}`
 
 
-System requirements
--------------------
+## System Requirements
 
-The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7 or later. 
+The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7.1 or later.
 
-All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.1.1 or later. See [Configure Maven for JBoss EAP 7](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
+All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.2.5 or later. See [Configure Maven for JBoss EAP 7.1](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
 
 
-Use of EAP7_HOME
----------------
+## Use of EAP7_HOME
 
 In the following instructions, replace `EAP7_HOME` with the actual path to your JBoss EAP installation. The installation path is described in detail here: [Use of EAP7_HOME and JBOSS_HOME Variables](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_OF_EAP7_HOME.md#use-of-eap_home-and-jboss_home-variables).
 
 
-Configure the JBoss EAP Server
----------------------------
+## Configure the Server
 
-You enable MDB property substitution by running JBoss CLI commands. For your convenience, this quickstart batches the commands into a `enable-mdb-property-substitution.cli` script provided in the root directory of this quickstart. 
+You enable MDB property substitution by running JBoss CLI commands. For your convenience, this quickstart batches the commands into a `enable-mdb-property-substitution.cli` script provided in the root directory of this quickstart.
 
 1. Before you begin, back up your server configuration file
     * If it is running, stop the JBoss EAP server.
     * Backup the file: `EAP7_HOME/standalone/configuration/standalone-full.xml`
     * After you have completed testing this quickstart, you can replace this file to restore the server to its original configuration.
-2. Start the JBoss EAP server by typing the following: 
+2. Start the JBoss EAP server by typing the following:
 
         For Linux:  EAP7_HOME/bin/standalone.sh -c standalone-full.xml
         For Windows:  EAP7_HOME\bin\standalone.bat -c standalone-full.xml
-3. Review the `enable-mdb-property-substitution.cli` script file in the root of this quickstart directory. This script first enables MDB annotation property substitution the `ee` subsystem of the server configuration file by creating an `annotation-property-replacement` property with a value of `true`. It then defines the system properties that are used in the substitution. 
+3. Review the `enable-mdb-property-substitution.cli` script file in the root of this quickstart directory. This script first enables MDB annotation property substitution the `ee` subsystem of the server configuration file by creating an `annotation-property-replacement` property with a value of `true`. It then defines the system properties that are used in the substitution.
 
 4. Open a new command prompt, navigate to the root directory of this quickstart, and run the following command, replacing EAP7_HOME with the path to your server:
 
@@ -58,8 +54,7 @@ You should see the following result when you run the script:
         The batch executed successfully
 5. Stop the JBoss EAP server.
 
-Review the Modified Server Configuration
------------------------------------
+## Review the Modified Server Configuration
 
 After stopping the server, open the `EAP7_HOME/standalone/configuration/standalone-full.xml` file and review the changes.
 
@@ -78,11 +73,9 @@ The following system properties are defined and appear after the `<extensions>`:
         <property name="property.helloworldmdb.topic" value="java:/topic/HELLOWORLDMDBPropTopic"/>
         <property name="property.connection.factory" value="java:/ConnectionFactory"/>
     </system-properties>
- 
 
 
-Start the JBoss EAP Server with the Full Profile
----------------
+## Start the Server with the Full Profile
 
 1. Open a command prompt and navigate to the root of the JBoss EAP directory.
 2. The following shows the command line to start the server with the full profile:
@@ -91,8 +84,7 @@ Start the JBoss EAP Server with the Full Profile
         For Windows: EAP7_HOME\bin\standalone.bat -c standalone-full.xml
 
 
-Build and Deploy the Quickstart
--------------------------
+## Build and Deploy the Quickstart
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command prompt and navigate to the root directory of this quickstart.
@@ -100,7 +92,7 @@ Build and Deploy the Quickstart
 
         mvn clean install wildfly:deploy
 
-4. This will deploy `target/jboss-helloworld-mdb-propertysubstitution.war` to the running instance of the server. Look at the JBoss EAP console or Server log and you should see log messages corresponding to the deployment of the message-driven beans and the JMS destinations:
+4. This will deploy `target/helloworld-mdb-propertysubstitution.war` to the running instance of the server. Look at the JBoss EAP console or Server log and you should see log messages corresponding to the deployment of the message-driven beans and the JMS destinations:
 
         INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-8) WFLYMSGAMQ0002: Bound messaging object to jndi name java:/${property.helloworldmdb.queue}
         INFO  [org.wildfly.extension.messaging-activemq] (MSC service thread 1-5) WFLYMSGAMQ0002: Bound messaging object to jndi name java:/${property.helloworldmdb.topic}
@@ -114,15 +106,13 @@ Build and Deploy the Quickstart
         INFO  [org.jboss.as.ejb3] (MSC service thread 1-6) WFLYEJB0042: Started message driven bean 'HelloWorldQueueMDB' with 'activemq-ra.rar' resource adapter
 
 
-Access the application 
----------------------
+## Access the Application
 
-The application will be running at the following URL: <http://localhost:8080/jboss-helloworld-mdb-propertysubstitution/> and will send some messages to the queue.
+The application will be running at the following URL: <http://localhost:8080/helloworld-mdb-propertysubstitution/> and will send some messages to the queue.
 
-To send messages to the topic, use the following URL: <http://localhost:8080/jboss-helloworld-mdb-propertysubstitution/HelloWorldMDBServletClient?topic>
+To send messages to the topic, use the following URL: <http://localhost:8080/helloworld-mdb-propertysubstitution/HelloWorldMDBServletClient?topic>
 
-Investigate the Server Console Output
--------------------------
+## Investigate the Server Console Output
 
 Look at the JBoss EAP console or Server log and you should see log messages like the following:
 
@@ -132,8 +122,7 @@ Look at the JBoss EAP console or Server log and you should see log messages like
     INFO  [class org.jboss.as.quickstarts.mdb.HelloWorldQueueMDB] (Thread-5 (ActiveMQ-client-global-threads-1189700957)) Received Message from queue: This is message 2
     INFO  [class org.jboss.as.quickstarts.mdb.HelloWorldQueueMDB] (Thread-4 (ActiveMQ-client-global-threads-1189700957)) Received Message from queue: This is message 3
 
-Undeploy the Archive
---------------------
+## Undeploy the Archive
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command prompt and navigate to the root directory of this quickstart.
@@ -141,14 +130,13 @@ Undeploy the Archive
 
         mvn wildfly:undeploy
 
-Restore the JBoss EAP Server Configuration
-----------------------------
+## Restore the Server Configuration
 
-You can remove the server configuration by running the  `disable-mdb-property-substitution.cli` script provided in the root directory of this quickstart or by manually restoring the back-up copy the configuration file. 
+You can remove the server configuration by running the  `disable-mdb-property-substitution.cli` script provided in the root directory of this quickstart or by manually restoring the back-up copy the configuration file.
 
 ### Restore Configuration by Running the JBoss CLI Script
 
-1. Start the JBoss EAP server by typing the following: 
+1. Start the JBoss EAP server by typing the following:
 
         For Linux:  EAP7_HOME/bin/standalone.sh -c standalone-full.xml
         For Windows:  EAP7_HOME\bin\standalone.bat -c standalone-full.xml
@@ -165,21 +153,17 @@ This script removes the system properties and sets the `<annotation-property-rep
 2. Replace the `EAP7_HOME/standalone/configuration/standalone-full.xml` file with the back-up copy of the file.
 
 
-Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
--------------------------------------
-You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts). 
+## Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
 
-* Be sure to enable MDB property substitution by running the JBoss CLI commands as described above under [Configure the JBoss EAP Server](#configure-the-jboss-eap-server). Stop the server at the end of that step.
+You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts).
+
+* Be sure to enable MDB property substitution by running the JBoss CLI commands as described above under [Configure the JBoss EAP Server](#configure-the-server). Stop the server at the end of that step.
 * Within JBoss Developer Studio, be sure to define a server runtime environment that uses the `standalone-full.xml` configuration file.
-* Be sure to [Restore the JBoss EAP Server Configuration](#restore-the-jboss-eap-server-configuration) when you have completed testing this quickstart.
+* Be sure to [Restore the JBoss EAP Server Configuration](#restore-the-server-configuration) when you have completed testing this quickstart.
 
 
-Debug the Application
-------------------------------------
+## Debug the Application
 
 If you want to debug the source code of any library in the project, run the following command to pull the source into your local repository. The IDE should then detect it.
 
     mvn dependency:sources
-   
-
-

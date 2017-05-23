@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     JBoss, Home of Professional Open Source
     Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
@@ -21,24 +21,128 @@
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>19</version>
-        <relativePath/>
+        <version>22</version>
+        <relativePath />
     </parent>
-    <groupId>org.jboss.quickstarts.eap</groupId>
-    <artifactId>jboss-quickstart-parent</artifactId>
-    <version>7.1.0-SNAPSHOT</version>
+    <groupId>org.jboss.eap.quickstarts</groupId>
+    <artifactId>quickstart-parent</artifactId>
+    <version>7.1.0.Alpha</version>
     <packaging>pom</packaging>
-    <name>JBoss EAP Quickstart: Parent</name>
+    <name>${qs.name.prefix} Parent</name>
     <description>JBoss EAP Quickstarts Parent</description>
     <url>http://www.jboss.org/jdf/quickstarts/get-started/</url>
 
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <distribution>repo</distribution>
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <properties>
+        <qs.name.prefix>JBoss EAP Quickstart:</qs.name.prefix>
+        <root.dir>${project.basedir}</root.dir>
+        <jboss.home.name>EAP7_HOME</jboss.home.name>
+        <product.name>JBoss EAP</product.name>
+        <!-- A base list of dependency and plug-in version used in the various quick starts. -->
+        <version.wildfly.maven.plugin>1.2.0.Alpha4</version.wildfly.maven.plugin>
+
+        <!-- other plug-in versions -->
+        <version.com.mycyla.license>3.0</version.com.mycyla.license>
+
+        <!-- Explicitly declaring the source encoding eliminates the following
+            message: [WARNING] Using platform encoding (UTF-8 actually) to copy
+            filtered resources, i.e. build is platform dependent! -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <version.spring.framework>4.3.6.RELEASE</version.spring.framework>
+        <!-- EAP component version management BOM -->
+        <version.server.bom>7.1.0.Alpha1</version.server.bom>
+        
+        <version.jboss.spec.javaee.7.0>1.1.0.Final-redhat-1</version.jboss.spec.javaee.7.0>
+
+        <!-- maven-compiler-plugin -->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+
+        <version.jaxws-tools-maven-plugin>1.2.0.Final</version.jaxws-tools-maven-plugin>
+
+        <!-- Other dependency versions -->
+        <version.ro.isdc.wro4j>1.7.9</version.ro.isdc.wro4j>
+        <httpclient.version>4.5.2.redhat-1</httpclient.version>
+        <version.org.apache.commons.commons-lang3>3.5</version.org.apache.commons.commons-lang3>
+        <version.h2db>1.4.193.redhat-2</version.h2db>
+        <version.org.wildfly.checkstyle-config>1.0.5.Final</version.org.wildfly.checkstyle-config>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Add H2 dependency for embedded testing database -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${version.h2db}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.5.0.redhat-2</version>
+                <scope>compile</scope>
+            </dependency>
+     
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${version.org.apache.commons.commons-lang3}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <!-- JBoss distributes a complete set of Java EE APIs including a Bill
+                of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection)
+                of artifacts. We use this here so that we always get the correct versions
+                of artifacts. Here we use the jboss-eap-javaee7-with-tools stack (you can
+                read this as the JBoss stack of the Java EE APIs, with some extras tools
+                for your project, such as Arquillian for testing) -->
+            <dependency>
+                <groupId>org.jboss.bom</groupId>
+                <artifactId>jboss-eap-javaee7-with-tools</artifactId>
+                <version>${version.server.bom}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Define the version of the JBoss Java EE APIs we want to use -->
+            <!-- JBoss distributes a complete set of Java EE APIs including
+               a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or
+               a collection) of artifacts. We use this here so that we always get the correct
+               versions of artifacts. Here we use the jboss-javaee-7.0 stack (you can
+               read this as the JBoss stack of the Java EE APIs). You can actually
+               use this stack with any version of JBoss EAP that implements Java EE. -->
+            <dependency>
+                <groupId>org.jboss.spec</groupId>
+                <artifactId>jboss-javaee-7.0</artifactId>
+                <version>${version.jboss.spec.javaee.7.0}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <!-- Activate the JBoss Enterprise Maven Repository.
 
@@ -53,71 +157,53 @@
     -->
     <repositories>
         <repository>
-            <id>jboss-developer-staging-repository</id>
-            <url>http://jboss-developer.github.io/temp-maven-repo/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
-        <repository>
             <id>jboss-enterprise-maven-repository</id>
             <url>https://maven.repository.redhat.com/ga/</url>
+        </repository>
+        <repository>
             <releases>
                 <enabled>true</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+            <id>jboss-enterprise-maven-repository-ea</id>
+            <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
-            <id>jboss-developer-staging-repository</id>
-            <url>http://jboss-developer.github.io/temp-maven-repo/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </pluginRepository>
-        <pluginRepository>
             <id>jboss-enterprise-maven-repository</id>
             <url>https://maven.repository.redhat.com/ga/</url>
+        </pluginRepository>
+        <pluginRepository>
             <releases>
                 <enabled>true</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+            <id>jboss-enterprise-maven-repository-ea</id>
+            <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
         </pluginRepository>
     </pluginRepositories>
-
-    <properties>
-        <!-- A base list of dependency and plug-in version used in the various quick starts. -->
-        <version.wildfly.maven.plugin>1.0.2.Final</version.wildfly.maven.plugin>
-
-        <!-- other plug-in versions -->
-        <version.com.mycyla.license>2.5</version.com.mycyla.license>
-    </properties>
-
     <build>
+        <!-- Set the name of the WAR, used as the context root when the app is deployed. -->
+        <finalName>${project.artifactId}</finalName>
         <plugins>
-            <!-- The WildFly plug-in deploys your apps to a local JBoss EAP container -->
-            <!-- Disabling it here means that we don't try to deploy this POM! -->
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>${version.wildfly.maven.plugin}</version>
-                <inherited>true</inherited>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
@@ -152,8 +238,127 @@
                         <headerDefinition>dist/headerdefinition.xml</headerDefinition>
                     </headerDefinitions>
                 </configuration>
-              </plugin>
+            </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.wildfly.plugins</groupId>
+                    <artifactId>wildfly-maven-plugin</artifactId>
+                    <version>${version.wildfly.maven.plugin}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ejb-plugin</artifactId>
+                    <version>${version.ejb.plugin}</version>
+                    <configuration>
+                        <!-- Tell Maven we are using EJB -->
+                        <ejbVersion>3.2</ejbVersion>
+                    </configuration>
+                </plugin>
+                <!-- Checkstyle -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${version.checkstyle.plugin}</version>
+                    <configuration>
+                        <configLocation>wildfly-checkstyle/checkstyle.xml</configLocation>
+                        <consoleOutput>true</consoleOutput>
+                        <failsOnError>true</failsOnError>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <excludes>**/*$logger.java,**/*$bundle.java</excludes>
+                        <useFile/>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.wildfly.checkstyle</groupId>
+                            <artifactId>wildfly-checkstyle-config</artifactId>
+                            <version>${version.org.wildfly.checkstyle-config}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>check-style</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>checkstyle</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                	<groupId>org.eclipse.m2e</groupId>
+                	<artifactId>lifecycle-mapping</artifactId>
+                	<version>1.0.0</version>
+                	<configuration>
+                		<lifecycleMappingMetadata>
+                			<pluginExecutions>
+                				<pluginExecution>
+                					<pluginExecutionFilter>
+                						<groupId>
+                							com.redhat.rcm.maven.plugin
+                						</groupId>
+                						<artifactId>
+                							buildmetadata-maven-plugin
+                						</artifactId>
+                						<versionRange>
+                							[1.7.0,)
+                						</versionRange>
+                						<goals>
+                							<goal>
+                								provide-buildmetadata
+                							</goal>
+                						</goals>
+                					</pluginExecutionFilter>
+                					<action>
+                						<ignore></ignore>
+                					</action>
+                				</pluginExecution>
+                				<pluginExecution>
+                					<pluginExecutionFilter>
+                						<groupId>
+                							org.commonjava.maven.plugins
+                						</groupId>
+                						<artifactId>
+                							project-sources-maven-plugin
+                						</artifactId>
+                						<versionRange>
+                							[0.3,)
+                						</versionRange>
+                						<goals>
+                							<goal>archive</goal>
+                						</goals>
+                					</pluginExecutionFilter>
+                					<action>
+                						<ignore></ignore>
+                					</action>
+                				</pluginExecution>
+                				<pluginExecution>
+                					<pluginExecutionFilter>
+                						<groupId>
+                							org.jboss.ws.plugins
+                						</groupId>
+                						<artifactId>
+                							jaxws-tools-maven-plugin
+                						</artifactId>
+                						<versionRange>
+                							[1.2.0.Final,)
+                						</versionRange>
+                						<goals>
+                							<goal>wsconsume</goal>
+                						</goals>
+                					</pluginExecutionFilter>
+                					<action>
+                						<ignore></ignore>
+                					</action>
+                				</pluginExecution>
+                			</pluginExecutions>
+                		</lifecycleMappingMetadata>
+                	</configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
@@ -249,6 +454,11 @@
                 <module>websocket-hello</module>
                 <module>xml-dom4j</module>
                 <module>xml-jaxp</module>
+                <!-- not real maven projects, but here for centralized mgmt and docs -->
+                <module>forge-from-scratch</module>
+                <module>h2-console</module>
+                <module>jts-distributed-crash-rec</module>
+                <module>messaging-clustering</module>
             </modules>
         </profile>
         <profile>
@@ -317,18 +527,177 @@
             </modules>
         </profile>
         <profile>
-            <!-- All the quickstarts that don't actually use Maven. Don't
-                activate this profile! We just include this for completeness. -->
-            <id>non-maven</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
+            <id>functional-tests</id>
             <modules>
-                <module>forge-from-scratch</module>
-                <module>h2-console</module>
-                <module>jts-distributed-crash-rec</module>
-                <module>messaging-clustering</module>
+                <module>contacts-jquerymobile/functional-tests</module>
+                <module>helloworld-html5/functional-tests</module>
+                <module>kitchensink-angularjs/functional-tests</module>
+                <module>spring-greeter/functional-tests</module>
+                <module>spring-kitchensink-basic/functional-tests</module>
+                <module>spring-kitchensink-controlleradvice/functional-tests</module>
+                <module>spring-kitchensink-springmvctest/functional-tests</module>
+                <module>spring-kitchensink-matrixvariables/functional-tests</module>
+                <module>spring-petclinic/functional-tests</module>
             </modules>
+        </profile>
+
+        <profile>
+            <!-- An optional Arquillian testing profile that executes tests in your JBoss EAP instance.
+                 This profile will start a new JBoss EAP instance, and execute the test, shutting it down when done.
+                 Run with: mvn clean verify -Parq-managed -->
+            <id>arq-managed</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.wildfly.arquillian</groupId>
+                    <artifactId>wildfly-arquillian-container-managed</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${version.failsafe.plugin}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <!-- An optional Arquillian testing profile that executes tests in a remote JBoss EAP instance.
+                 Run with: mvn clean verify -Parq-remote -->
+            <id>arq-remote</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.wildfly.arquillian</groupId>
+                    <artifactId>wildfly-arquillian-container-remote</artifactId>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${version.failsafe.plugin}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>root-dir</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/../docs.properties</exists>
+                </file>
+            </activation>
+            <properties>
+                <root.dir>${basedir}/../</root.dir>
+            </properties>
+        </profile>
+        <profile>
+            <id>root-dir2</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/../../docs.properties</exists>
+                </file>
+            </activation>
+            <properties>
+                <root.dir>${basedir}/../../</root.dir>
+            </properties>
+        </profile>
+        <profile>
+            <id>root-dir3</id>
+            <activation>
+                <file>
+                    <exists>${basedir}/../../../docs.properties</exists>
+                </file>
+            </activation>
+            <properties>
+                <root.dir>${basedir}/../../../</root.dir>
+            </properties>
+        </profile>
+        <profile>
+            <id>docs</id>
+            <activation>
+                <property>
+                    <name>docs</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>${version.resources.plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <!-- here the phase you need -->
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/docs</outputDirectory>
+                                    <filters>
+                                        <filter>${root.dir}/docs.properties</filter>
+                                    </filters>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}</directory>
+                                            <includes>
+                                                <include>*.md</include>
+                                            </includes>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.vladsch.flexmark</groupId>
+                        <artifactId>markdown-page-generator-plugin</artifactId>
+                        <version>0.15.4</version>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <inputDirectory>${project.build.directory}/docs</inputDirectory>
+                            <outputDirectory>${project.basedir}</outputDirectory>
+                            <defaultTitle>${project.name}</defaultTitle>
+                            <inputEncoding>UTF-8</inputEncoding>
+                            <headerHtmlFile>${root.dir}/dist/header.html</headerHtmlFile>
+                            <footerHtmlFile>${root.dir}/dist/footer.html</footerHtmlFile>
+                            <pegdownExtensions>TABLES,TOC,AUTOLINKS,STRIKETHROUGH,ATXHEADERSPACE,FENCED_CODE_BLOCKS,HARDWRAPS,ANCHORLINKS,RELAXEDHRULES</pegdownExtensions>
+                            <!--<copyDirectories>css,js</copyDirectories>-->
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 </project>

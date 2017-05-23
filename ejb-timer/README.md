@@ -1,40 +1,35 @@
-ejb-timer: Example of EJB Timer Service - @Schedule and @Timeout
-===========================================
+# ejb-timer: Example of EJB Timer Service - @Schedule and @Timeout
 Author: Ondrej Zizka <ozizka@redhat.com>  
 Level: Beginner  
 Technologies: EJB Timer  
 Summary: The `ejb-timer` quickstart demonstrates how to use the EJB timer service `@Schedule` and `@Timeout` annotations with JBoss EAP.  
 Target Product: JBoss EAP  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts/>  
+Source: <https://github.com/jbossas/eap-quickstarts/>  
 
-What is it?
------------
+## What is it?
 
-The `ejb-timer` quickstart demonstrates how to use the EJB timer service in Red Hat JBoss Enterprise Application Platform. This example creates a timer service that uses the `@Schedule` and `@Timeout` annotations. 
+The `ejb-timer` quickstart demonstrates how to use the EJB timer service in Red Hat JBoss Enterprise Application Platform. This example creates a timer service that uses the `@Schedule` and `@Timeout` annotations.
 
 
 The following EJB Timer services are demonstrated:
 
  * `@Schedule`: Uses this annotation to mark a method to be executed according to the calendar schedule specified in the attributes of the annotation. This example schedules a message to be printed to the server console every 6 seconds.
  * `@Timeout`: Uses this annotation to mark a method to execute when a programmatic timer goes off. This example sets the timer to go off every 3 seconds, at which point the method prints a message to the server console.
- 
 
-System requirements
--------------------
 
-The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7 or later. 
+## System Requirements
 
-All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.1.1 or later. See [Configure Maven for JBoss EAP 7](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
+The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7.1 or later.
 
- 
-Use of EAP7_HOME
----------------
+All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.2.5 or later. See [Configure Maven for JBoss EAP 7.1](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
+
+
+## Use of EAP7_HOME
 
 In the following instructions, replace `EAP7_HOME` with the actual path to your JBoss EAP installation. The installation path is described in detail here: [Use of EAP7_HOME and JBOSS_HOME Variables](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_OF_EAP7_HOME.md#use-of-eap_home-and-jboss_home-variables).
 
 
-Start the JBoss EAP Server
--------------------------
+## Start the Server
 
 1. Open a command prompt and navigate to the root of the JBoss EAP directory.
 2. The following shows the command line to start the server:
@@ -43,8 +38,7 @@ Start the JBoss EAP Server
         For Windows: EAP7_HOME\bin\standalone.bat
 
 
-Build and Deploy the Quickstart
--------------------------
+## Build and Deploy the Quickstart
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command prompt and navigate to the root directory of this quickstart.
@@ -52,11 +46,10 @@ Build and Deploy the Quickstart
 
         mvn clean install wildfly:deploy
 
-This will deploy `target/jboss-ejb-timer.war` to the running instance of the server.
+This will deploy `target/ejb-timer.war` to the running instance of the server.
 
 
-Access the application
-----------------------
+## Access the Application
 
 This application only prints messages to stdout.
 To see it working, check the server log. You should see similar output:
@@ -81,8 +74,7 @@ To see it working, check the server log. You should see similar output:
 Existing threads in the thread pool handle the invocations. They are rotated and the name of the thread that handles the invocation is printed within the parenthesis `(EJB Default - #)`.
 
 
-Undeploy the Archive
---------------------
+## Undeploy the Archive
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command prompt and navigate to the root directory of this quickstart.
@@ -90,16 +82,14 @@ Undeploy the Archive
 
         mvn wildfly:undeploy
 
-Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
--------------------------------------
-You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts). 
+## Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
+
+You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts).
 
 
-Debug the Application
-------------------------------------
+## Debug the Application
 
-If you want to debug the source code of any library in the project, 
+If you want to debug the source code of any library in the project,
 run the following command to pull the source into your local repository. The IDE should then detect it.
 
         mvn dependency:sources
-

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     JBoss, Home of Professional Open Source
     Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
@@ -19,22 +19,23 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.jboss.quickstarts.eap</groupId>
-        <artifactId>jboss-inter-app</artifactId>
-        <version>7.1.0-SNAPSHOT</version>
+        <groupId>org.jboss.eap.quickstarts</groupId>
+        <artifactId>inter-app</artifactId>
+        <version>7.1.0.Alpha</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>jboss-inter-app-appA</artifactId>
+    <artifactId>inter-app-appA</artifactId>
     <packaging>war</packaging>
 
-    <name>JBoss EAP Quickstart: inter-app - appA</name>
+    <name>${qs.name.prefix} inter-app - appA</name>
     <description>This project demonstrates inter-application communication between two applications using EJB and CDI; this is the appA POM file</description>
 
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <distribution>repo</distribution>
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
@@ -47,21 +48,21 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Import the shared API module, which is used by Maven at compilation
+            time. See the corresponding Dependencies entry in the MANIFEST.mf which defines
+            the dependency at runtime. -->
+        <dependency>
+            <groupId>org.jboss.eap.quickstarts</groupId>
+            <artifactId>inter-app-shared</artifactId>
+            <type>ejb</type>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Import the EJB API, we use provided scope as the API is included in JBoss EAP -->
         <dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
             <artifactId>jboss-ejb-api_3.2_spec</artifactId>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- Import the shared API module, which is used by Maven at compilation
-            time. See the corresponding Dependencies entry in the MANIFEST.mf which defines
-            the dependency at runtime. -->
-        <dependency>
-            <groupId>org.jboss.quickstarts.eap</groupId>
-            <artifactId>jboss-inter-app-shared</artifactId>
-            <scope>provided</scope>
-            <type>ejb</type>
         </dependency>
 
     </dependencies>
@@ -72,8 +73,8 @@
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>${version.war.plugin}</version>
                 <configuration>
                     <!-- Java EE doesn't require web.xml, Maven needs to
                         catch up! -->
@@ -83,17 +84,12 @@
                         in the POM, which defines the dependency at compile time. -->
                     <archive>
                         <manifestEntries>
-                            <Dependencies>deployment.jboss-inter-app-shared.jar</Dependencies>
+                            <Dependencies>deployment.inter-app-shared.jar</Dependencies>
                         </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
-            <!-- WildFly plug-in to deploy the WAR -->
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>${version.wildfly.maven.plugin}</version>
-            </plugin>
+           
         </plugins>
     </build>
 

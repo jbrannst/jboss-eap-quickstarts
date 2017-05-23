@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     JBoss, Home of Professional Open Source
     Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
@@ -19,42 +19,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.jboss.quickstarts.eap</groupId>
-        <artifactId>jboss-ejb-throws-exception</artifactId>
-        <version>7.1.0-SNAPSHOT</version>
+        <groupId>org.jboss.eap.quickstarts</groupId>
+        <artifactId>ejb-throws-exception</artifactId>
+        <version>7.1.0.Alpha</version>
     </parent>
-    <artifactId>jboss-ejb-throws-exception-web</artifactId>
+    <artifactId>ejb-throws-exception-web</artifactId>
     <packaging>war</packaging>
-    <name>JBoss EAP Quickstart: ejb-throws-exception - web</name>
+    <name>${qs.name.prefix} ejb-throws-exception - web</name>
     <description>This project demonstrates how to throw an exception in an EJB and catch it in the web layer; this is the web POM file</description>
-    <url>http://www.jboss.org/products/eap</url>
 
     <licenses>
-       <license>
-          <name>Apache License, Version 2.0</name>
-          <distribution>repo</distribution>
-          <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-       </license>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
     </licenses>
 
     <dependencies>
-
-        <!-- Dependency on the EJB module so we can use it's services if
-            needed -->
-        <dependency>
-            <groupId>org.jboss.quickstarts.eap</groupId>
-            <artifactId>jboss-ejb-throws-exception-ejb</artifactId>
-            <type>ejb</type>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Import the JAX-RS API, we use provided scope as the API is included
-            in JBoss EAP -->
-        <dependency>
-            <groupId>org.jboss.spec.javax.ws.rs</groupId>
-            <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
 
         <!-- Import the CDI API, we use provided scope as the API is included
             in JBoss EAP -->
@@ -72,27 +54,28 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Dependency on the EJB module so we can use it's services if
+            needed -->
+        <dependency>
+            <groupId>org.jboss.eap.quickstarts</groupId>
+            <artifactId>ejb-throws-exception-ejb</artifactId>
+            <type>ejb</type>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
             <artifactId>jboss-ejb-api_3.2_spec</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Import the JAX-RS API, we use provided scope as the API is included
+            in JBoss EAP -->
+        <dependency>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
-
-    <build>
-        <finalName>${project.artifactId}</finalName>
-
-        <plugins>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${version.war.plugin}</version>
-                <configuration>
-                    <!-- Java EE doesn't require web.xml, Maven needs to
-                        catch up! -->
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

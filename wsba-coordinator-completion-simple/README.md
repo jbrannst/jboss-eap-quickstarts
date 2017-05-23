@@ -1,14 +1,13 @@
-wsba-coordinator-completion-simple: Example of a WS-BA Enabled JAX-WS Web Service
-=================================================================================
+# wsba-coordinator-completion-simple: Example of a WS-BA Enabled JAX-WS Web Service
+
 Author: Paul Robinson  
 Level: Intermediate  
 Technologies: WS-BA, JAX-WS  
 Summary:  The `wsba-coordinator-completion-simple` quickstart deploys a WS-BA (WS Business Activity) enabled JAX-WS Web service WAR (CoordinatorCompletion protocol).  
 Target Product: JBoss EAP  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts/>  
+Source: <https://github.com/jbossas/eap-quickstarts/>  
 
-What is it?
------------
+## What is it?
 
 The `wsba-coordinator-completion-simple` quickstart demonstrates the deployment of a WS-BA (WS Business Activity) enabled JAX-WS Web service bundled in a WAR archive (Participant Completion protocol) for deployment to Red Hat JBoss Enterprise Application Platform.
 
@@ -36,23 +35,21 @@ When running the org.jboss.as.quickstarts.wsba.coordinatorcompletion.simple.Clie
 6. For the first request, in this BA, A participant is enlisted in this BA. This allows the Web Service logic to respond to protocol events, such as compensate and close.
 7. The service invokes the business logic. In this case, a String value is added to the set.
 9. The client can then make additional calls to the `SetService`. As the `SetService` participates as a `CoordinatorCompletion` protocol, it will continue to accept calls to `addValueToSet` until it is told to complete by the coordinator.
-10. The client can then decide to complete or cancel the BA. 
+10. The client can then decide to complete or cancel the BA.
     * If the client decides to complete, all participants will be told to complete. Providing all participants successfully complete, the coordinator will then tell all participants to close, otherwise the completed participants will be told to compensate.
     * If the participant decides to cancel, all participants will be told to compensate.
 
 There is another test that shows how the client can cancel a BA.
 
 
-System requirements
--------------------
+## System Requirements
 
-The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7 or later. 
+The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7.1 or later.
 
-All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.1.1 or later. See [Configure Maven for JBoss EAP 7](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
+All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.2.5 or later. See [Configure Maven for JBoss EAP 7.1](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
 
 
-Start the JBoss EAP Server with the Custom Options
-----------------------
+## Start the Server with the Custom Options
 
 Next you need to start JBoss EAP with the XTS subsystem enabled. This is enabled through the optional server configuration *standalone-xts.xml*. To do this, run the following commands from the top-level directory of JBoss EAP:
 
@@ -63,16 +60,15 @@ Next you need to start JBoss EAP with the XTS subsystem enabled. This is enabled
 Note, the pipe to egrep (| egrep "started|stdout") is useful to just show when the server has started and the output from these tests. For normal operation, this pipe can be removed.
 
 
-Run the Arquillian Tests 
--------------------------
+## Run the Arquillian Tests
 
-This quickstart provides Arquillian tests. By default, these tests are configured to be skipped as Arquillian tests require the use of a container. 
+This quickstart provides Arquillian tests. By default, these tests are configured to be skipped as Arquillian tests require the use of a container.
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command prompt and navigate to the root directory of this quickstart.
 3. Type the following command to run the test goal with the following profile activated:
 
-        mvn clean test -Parq-wildfly-remote 
+        mvn clean verify -Parq-remote
 
 4. You should see the following result.
 
@@ -88,11 +84,10 @@ _Note: You see the following warning when you run the Arquillian tests in remote
 
 _This is because, in remote mode, you are responsible for starting the server with the XTS subsystem enabled. When you run the Arquillian tests in managed mode, the container uses the `serverConfig` property defined in the `arquillian.xml` file to start the server with the XTS subsystem enabled._
 
-You can also let Arquillian manage the JBoss EAP server by using the `arq-wildfly-managed` profile. For more information about how to run the Arquillian tests, see [Run the Arquillian Tests](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/RUN_ARQUILLIAN_TESTS.md#run-the-arquillian-tests).
+You can also let Arquillian manage the JBoss EAP server by using the `arq-managed` profile. For more information about how to run the Arquillian tests, see [Run the Arquillian Tests](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/RUN_ARQUILLIAN_TESTS.md#run-the-arquillian-tests).
 
 
-Investigate the Server Log
-----------------------------
+## Investigate the Server Log
 
 The following messages should appear in the server log. Note there may be other log messages interlaced between these. The messages trace the steps taken by the tests.
 
@@ -135,33 +130,31 @@ Test cancel:
     16:24:19,816 INFO  [stdout] (TaskWorker-3) [SERVICE] Compensate the backend resource by removing '2' from the set (e.g. undo any changes to databases that were previously made visible to others)
 
 
-Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
--------------------------------------
-You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts). 
+## Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
+
+You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts).
 
 This quickstart is more complex than the others. It requires that you configure the JBoss EAP server to use the *standalone-xts.xml* configuration file, which is located in an external configuration directory.
 
-1. Be sure to import the quickstart into JBoss Developer Studio. 
+1. Be sure to import the quickstart into JBoss Developer Studio.
 2. If you have not already done so, you must configure a new JBoss EAP server to use the XTS configuration.
    * In the `Server` tab, right-click and choose `New` --> `Server`.
-   * Under `Select the server type:`, expand `Red Hat JBoss Middleware` and choose `JBoss Enterprise Application Platform 7.0 (Experimental)`.
+   * Under `Select the server type:`, expand `Red Hat JBoss Middleware` and choose `Red Hat JBoss Enterprise Application Platform 7.x`.
    * For the `Server name`, enter `JBoss EAP XTS Configuration` and click `Next`.
    * In the `Create a new Server Adapter` dialog, choose `Create a new runtime (next page)` and click `Next`.
    * In the `JBoss Runtime` dialog, enter the following information and then click `Finish`.
-   
+
             Name: JBoss EAP XTS Runtime
             Home Directory: (Browse to the server directory and select it)
             Execution Environment: (Choose your runtime JRE if not correct)
             Configuration base directory: (This should already point to your server configuration directory)
             Configuration file: ../../docs/examples/configs/standalone-xts.xml
-3. Start the new `JBoss EAP XTS Configuration` server. 
-4. Right-click on the `jboss-wsba-coordinator-completion-simple` project, choose `Run As` --> `Maven build`, enter `clean test -Parq-wildfly-remote` for the `Goals:`, and click `Run` to run the Arquillian tests. The test results appear in the console.
+3. Start the new `JBoss EAP XTS Configuration` server.
+4. Right-click on the `wsba-coordinator-completion-simple` project, choose `Run As` --> `Maven build`, enter `clean verify -Parq-remote` for the `Goals:`, and click `Run` to run the Arquillian tests. The test results appear in the console.
 
 
-Debug the Application
-------------------------------------
+## Debug the Application
 
 If you want to debug the source code of any library in the project, run the following command to pull the source into your local repository. The IDE should then detect it.
 
         mvn dependency:sources
-

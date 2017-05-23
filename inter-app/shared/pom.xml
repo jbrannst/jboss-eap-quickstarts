@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     JBoss, Home of Professional Open Source
     Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
@@ -19,22 +19,23 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.jboss.quickstarts.eap</groupId>
-        <artifactId>jboss-inter-app</artifactId>
-        <version>7.1.0-SNAPSHOT</version>
+        <groupId>org.jboss.eap.quickstarts</groupId>
+        <artifactId>inter-app</artifactId>
+        <version>7.1.0.Alpha</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>jboss-inter-app-shared</artifactId>
+    <artifactId>inter-app-shared</artifactId>
     <packaging>ejb</packaging>
 
-    <name>JBoss EAP Quickstart: inter-app - shared</name>
+    <name>${qs.name.prefix} inter-app - shared</name>
     <description>This project demonstrates inter-application communication between two applications using EJB and CDI; this is the shared project POM file</description>
 
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <distribution>repo</distribution>
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
@@ -58,18 +59,9 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>${version.wildfly.maven.plugin}</version>
                 <configuration>
                     <skip>false</skip>
                     <filename>${project.build.finalName}.jar</filename>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-ejb-plugin</artifactId>
-                <version>${version.ejb.plugin}</version>
-                <configuration>
-                    <ejbVersion>3.1</ejbVersion>
                 </configuration>
             </plugin>
         </plugins>

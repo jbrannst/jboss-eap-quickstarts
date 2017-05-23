@@ -1,20 +1,19 @@
-cdi-portable-extension: CDI Portable Extension 
-======================================================
+# cdi-portable-extension: CDI Portable Extension
+
 Author: Jason Porter  
 Level: Intermediate  
 Technologies: CDI  
 Summary: The `cdi-portable-extension` quickstart demonstrates a simple CDI Portable Extension that uses SPI classes to inject beans with data from an XML file.  
 Target Product: JBoss EAP  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts/>  
+Source: <https://github.com/jbossas/eap-quickstarts/>  
 
-What is it?
------------
+## What is it?
 
-The `cdi-portable-extension` quickstart demonstrates how to use some of the SPI classes to create a simple CDI portable extension in an application deployed to Red Hat JBoss Enterprise Application Platform. 
+The `cdi-portable-extension` quickstart demonstrates how to use some of the SPI classes to create a simple CDI portable extension in an application deployed to Red Hat JBoss Enterprise Application Platform.
 
-CDI exposes a set of SPIs to allow development of portable extensions to CDI. A portable extension is an extension to Java EE 6 and above that is tailored to a specific use case and runs on any Java EE 6 or later implementation. Portable extensions can implement features not yet supported by the specifications, such as type-safe messages or external configuration of beans. 
+CDI exposes a set of SPIs to allow development of portable extensions to CDI. A portable extension is an extension to Java EE 6 and above that is tailored to a specific use case and runs on any Java EE 6 or later implementation. Portable extensions can implement features not yet supported by the specifications, such as type-safe messages or external configuration of beans.
 
-This particular extension explores the `ProcessInjectionTarget` and `InjectionTarget` SPI classes of CDI to demonstrate one possible way to seed data into beans. It uses the `ProcessInjectionTarget` to create and add state to beans using XML. It is similar to the Seam XML configuration idea from Seam 3, but is much more simplistic. 
+This particular extension explores the `ProcessInjectionTarget` and `InjectionTarget` SPI classes of CDI to demonstrate one possible way to seed data into beans. It uses the `ProcessInjectionTarget` to create and add state to beans using XML. It is similar to the Seam XML configuration idea from Seam 3, but is much more simplistic.
 
 The project contains very simple domain model classes, an extension class, the service registration file
 for that extension and an Arquillian test to verify the extension is working correctly.
@@ -33,23 +32,19 @@ On application start, there will be one instance of `Monster` with a name of `Ca
 _Note:_ This quickstart does not contain any user interface. Instead, you run tests and check server log messages to verify everything is working correctly.
 
 
+## System Requirements
 
-System requirements
--------------------
+The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7.1 or later.
 
-The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7 or later. 
-
-All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.1.1 or later. See [Configure Maven for JBoss EAP 7](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
+All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.2.5 or later. See [Configure Maven for JBoss EAP 7.1](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
 
 
-Use of EAP7_HOME
----------------
+## Use of EAP7_HOME
 
 In the following instructions, replace `EAP7_HOME` with the actual path to your JBoss EAP installation. The installation path is described in detail here: [Use of EAP7_HOME and JBOSS_HOME Variables](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_OF_EAP7_HOME.md#use-of-eap_home-and-jboss_home-variables).
 
 
-Start the JBoss EAP Server
--------------------------
+## Start the Server
 
 1. Open a command prompt and navigate to the root of the JBoss EAP directory.
 2. The following shows the command line to start the server:
@@ -58,8 +53,7 @@ Start the JBoss EAP Server
         For Windows: EAP7_HOME\bin\standalone.bat
 
 
-Run the Arquillian Tests
--------------------------
+## Run the Arquillian Tests
 
 This quickstart provides Arquillian tests. By default, these tests are configured to be skipped as Arquillian tests require the use of a container.
 
@@ -67,15 +61,14 @@ This quickstart provides Arquillian tests. By default, these tests are configure
 2. Open a command prompt and navigate to the root directory of this quickstart.
 3. Type the following command to run the test goal with the following profile activated:
 
-        mvn clean test -Parq-wildfly-remote
+        mvn clean verify -Parq-remote
 
-You can also let Arquillian manage the JBoss EAP server by using the `arq-wildfly-managed` profile. For more information about how to run the Arquillian tests, see [Run the Arquillian Tests](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/RUN_ARQUILLIAN_TESTS.md#run-the-arquillian-tests).
+You can also let Arquillian manage the JBoss EAP server by using the `arq-managed` profile. For more information about how to run the Arquillian tests, see [Run the Arquillian Tests](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/RUN_ARQUILLIAN_TESTS.md#run-the-arquillian-tests).
 
 
-Investigate the Console Output
-----------------------------
+## Investigate the Console Output
 
-Maven prints summary of the 2 performed tests to the console.
+Maven prints a summary of the two performed tests to the console.
 
     -------------------------------------------------------
      T E S T S
@@ -90,9 +83,7 @@ Maven prints summary of the 2 performed tests to the console.
 
 ### Server log
 
-There are two logging statements done when the tests are run:
-
-#### Example
+The following messages are written to the server log when the tests are run:
 
     INFO  [org.jboss.as.server.deployment] (MSC service thread 1-6) WFLYSRV0027: Starting deployment of "test.war" (runtime-name: "test.war")
     ...
@@ -108,17 +99,16 @@ There are two logging statements done when the tests are run:
 The two statements to look for are these:
 
     INFO  [org.jboss.as.quickstart.cdi.extension.CreatureExtension] (MSC service thread 1-3) Setting up injection target for class org.jboss.as.quickstart.cdi.extension.model.Monster
+
     INFO  [org.jboss.as.quickstart.cdi.extension.CreatureExtension] (MSC service thread 1-3) Setting up injection target for class org.jboss.as.quickstart.cdi.extension.model.NonPlayerCharacter
 
-Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
--------------------------------------
+## Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
+
 You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts).
 
 
-Debug the Application
-------------------------------------
+## Debug the Application
 
 If you want to debug the source code of any library in the project, run the following command to pull the source into your local repository. The IDE should then detect it.
 
         mvn dependency:sources
-

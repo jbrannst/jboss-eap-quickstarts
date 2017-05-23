@@ -1,28 +1,25 @@
-spring-resteasy: Example Using Resteasy Spring Integration
-==========================================================
+# spring-resteasy: Example Using Resteasy Spring Integration
+
 Author: Weinan Li <l.weinan@gmail.com>, Paul Gier <pgier@redhat.com>  
 Level: Beginner  
 Technologies: Resteasy, Spring  
 Summary: The `spring-resteasy` quickstart demonstrates how to package and deploy a web application that includes resteasy-spring integration.  
 Target Product: JBoss EAP  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts/>  
+Source: <https://github.com/jbossas/eap-quickstarts/>  
 
-What is it?
------------
+## What is it?
 
-The `spring-resteasy` quickstart demonstrates how to package and deploy a web application, which includes resteasy-spring integration, in 
+The `spring-resteasy` quickstart demonstrates how to package and deploy a web application, which includes resteasy-spring integration, in
 Red Hat JBoss Enterprise Application Platform.
 
-System requirements
--------------------
+## System Requirements
 
-The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7 or later. 
+The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7.1 or later.
 
-All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.1.1 or later. See [Configure Maven for JBoss EAP 7](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
+All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.2.5 or later. See [Configure Maven for JBoss EAP 7.1](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
 
 
-Start the JBoss EAP Server
-----------------------
+## Start the Server
 
 1. Open a command line and navigate to the root of the JBoss EAP directory.
 2. The following shows the command line to start the server with the full profile:
@@ -31,8 +28,7 @@ Start the JBoss EAP Server
         For Windows: EAP7_HOME\bin\standalone.bat
 
 
-Build and Deploy the Quickstart
--------------------------------
+## Build and Deploy the Quickstart
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command line and navigate to the root directory of this quickstart.
@@ -40,33 +36,31 @@ Build and Deploy the Quickstart
 
         mvn clean package wildfly:deploy
 
-4. This deploys the `target/jboss-spring-resteasy.war` to the running instance of the server.
+4. This deploys the `target/spring-resteasy.war` to the running instance of the server.
 
 
-Access the application 
----------------------
+## Access the Application
 
-The application will be running at the following URL:  <http://localhost:8080/jboss-spring-resteasy/>. 
+The application will be running at the following URL:  <http://localhost:8080/spring-resteasy/>.
 
 That will provide links to the following URLs that demonstrate various path and parameter configurations.
 
-* [jboss-spring-resteasy/hello?name=yourname](http://localhost:8080/jboss-spring-resteasy/hello?name=yourname)
-* [jboss-spring-resteasy/basic](http://localhost:8080/jboss-spring-resteasy/basic)
-* [jboss-spring-resteasy/queryParam?param=query](http://localhost:8080/jboss-spring-resteasy/queryParam?param=query)
-* [jboss-spring-resteasy/matrixParam;param=matrix](http://localhost:8080/jboss-spring-resteasy/matrixParam;param=matrix)
-* [jboss-spring-resteasy/uriParam/789](http://localhost:8080/jboss-spring-resteasy/uriParam/789)
+* [spring-resteasy/hello?name=yourname](http://localhost:8080/spring-resteasy/hello?name=yourname)
+* [spring-resteasy/basic](http://localhost:8080/spring-resteasy/basic)
+* [spring-resteasy/queryParam?param=query](http://localhost:8080/spring-resteasy/queryParam?param=query)
+* [spring-resteasy/matrixParam;param=matrix](http://localhost:8080/spring-resteasy/matrixParam;param=matrix)
+* [spring-resteasy/uriParam/789](http://localhost:8080/spring-resteasy/uriParam/789)
 
 And the same set as above but using the `locating` path.
 
-* [jboss-spring-resteasy/locating/hello?name=yourname](http://localhost:8080/jboss-spring-resteasy/locating/hello?name=yourname)
-* [jboss-spring-resteasy/locating/basic](http://localhost:8080/jboss-spring-resteasy/locating/basic)
-* [jboss-spring-resteasy/locating/queryParam?param=query](http://localhost:8080/jboss-spring-resteasy/locating/queryParam?param=query)
-* [jboss-spring-resteasy/locating/matrixParam;param=matrix](http://localhost:8080/jboss-spring-resteasy/locating/matrixParam;param=matrix)
-* [jboss-spring-resteasy/locating/uriParam/789](http://localhost:8080/jboss-spring-resteasy/locating/uriParam/789)
+* [spring-resteasy/locating/hello?name=yourname](http://localhost:8080/spring-resteasy/locating/hello?name=yourname)
+* [spring-resteasy/locating/basic](http://localhost:8080/spring-resteasy/locating/basic)
+* [spring-resteasy/locating/queryParam?param=query](http://localhost:8080/spring-resteasy/locating/queryParam?param=query)
+* [spring-resteasy/locating/matrixParam;param=matrix](http://localhost:8080/spring-resteasy/locating/matrixParam;param=matrix)
+* [spring-resteasy/locating/uriParam/789](http://localhost:8080/spring-resteasy/locating/uriParam/789)
 
 
-Run the Tests
--------------
+## Run the Tests
 
 1. Make sure you have **started** the JBoss EAP server as described above and **deployed** the quickstart.
 2. Open a command prompt and navigate to the root directory of this quickstart.
@@ -92,8 +86,7 @@ Run the Tests
 
 
 
-Undeploy the Archive
---------------------
+## Undeploy the Archive
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command line and navigate to the root directory of this quickstart.

@@ -1,14 +1,13 @@
-wsat-simple: WS-AT (WS-AtomicTransaction) - Simple
-==================================================
+# wsat-simple: WS-AT (WS-AtomicTransaction) - Simple
+
 Author: Paul Robinson  
 Level: Intermediate  
 Technologies: WS-AT, JAX-WS  
 Summary: The `wsat-simple` quickstart demonstrates a WS-AT (WS-AtomicTransaction) enabled JAX-WS Web service, bundled as a WAR, and deployed to JBoss EAP.  
 Target Product: JBoss EAP  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts/>  
+Source: <https://github.com/jbossas/eap-quickstarts/>  
 
-What is it?
------------
+## What is it?
 
 The `wsat-simple` quickstart demonstrates the deployment of a WS-AT (WS-AtomicTransaction) enabled JAX-WS Web service bundled in a WAR archive for deployment to Red Hat JBoss Enterprise Application Platform.
 
@@ -41,16 +40,14 @@ When running the `org.jboss.as.quickstarts.wsat.simple.ClientTest#testCommit()` 
 There is another test that shows what happens if the client decides to rollback the AT.
 
 
-System requirements
--------------------
+## System Requirements
 
-The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7 or later. 
+The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7.1 or later.
 
-All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.1.1 or later. See [Configure Maven for JBoss EAP 7](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
+All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.2.5 or later. See [Configure Maven for JBoss EAP 7.1](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
 
 
-Start the JBoss EAP Server with the Custom Options
-----------------------
+## Start the Server with the Custom Options
 
 First, edit the log level to reduce the amount of log output. This should make it easier to read the logs produced by this example. To do this add the
 following logger block to the ./docs/examples/configs/standalone-xts.xml of your JBoss distribution. You should add it just bellow one of the other logger blocks.
@@ -65,16 +62,15 @@ Next you need to start JBoss EAP with the XTS subsystem enabled. This is enabled
         For Windows:   \bin\standalone.bat --server-config=..\..\docs\examples\configs\standalone-xts.xml
 
 
-Run the Arquillian Tests 
--------------------------
+## Run the Arquillian Tests
 
-This quickstart provides Arquillian tests. By default, these tests are configured to be skipped as Arquillian tests require the use of a container. 
+This quickstart provides Arquillian tests. By default, these tests are configured to be skipped as Arquillian tests require the use of a container.
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command prompt and navigate to the root directory of this quickstart.
 3. Type the following command to run the test goal with the following profile activated:
 
-        mvn clean test -Parq-wildfly-remote 
+        mvn clean verify -Parq-remote
 
 4. You should see the following result.
 
@@ -90,13 +86,12 @@ _Note: You see the following warning when you run the Arquillian tests in remote
 
 _This is because, in remote mode, you are responsible for starting the server with the XTS subsystem enabled. When you run the Arquillian tests in managed mode, the container uses the `serverConfig` property defined in the `arquillian.xml` file to start the server with the XTS subsystem enabled._
 
-You can also let Arquillian manage the JBoss EAP server by using the `arq-wildfly-managed` profile. For more information about how to run the Arquillian tests, see [Run the Arquillian Tests](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/RUN_ARQUILLIAN_TESTS.md#run-the-arquillian-tests).
+You can also let Arquillian manage the JBoss EAP server by using the `arq-managed` profile. For more information about how to run the Arquillian tests, see [Run the Arquillian Tests](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/RUN_ARQUILLIAN_TESTS.md#run-the-arquillian-tests).
 
 
-Investigate the Server Log
-----------------------------
+## Investigate the Server Log
 
-The following messages should appear in the server log. The messages trace the steps taken by the tests. Note there may be other informational log messages interlaced between these. 
+The following messages should appear in the server log. The messages trace the steps taken by the tests. Note there may be other informational log messages interlaced between these.
 
 Test rollback:
 
@@ -133,32 +128,30 @@ Test commit:
 _Note: You can ignore the warning message `ARJUNA043219: Could not save recovery state for non-serializable durable WS-AT participant restaurantServiceAT` that is printed in the server console. This quickstart does not implement the required recovery hooks in the interest of making it easy to follow. In a real world production application, you should provide the required recovery code. For more information, see_ <http://narayana.io/docs/product>.
 
 
+## Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
 
-Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
--------------------------------------
-You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts). 
+You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts).
 
 This quickstart is more complex than the others. It requires that you configure the JBoss EAP server to use the *standalone-xts.xml* configuration file, which is located in an external configuration directory.
 
-1. Import the quickstart into JBoss Developer Studio. 
+1. Import the quickstart into JBoss Developer Studio.
 2. If you have not already done so, you must configure a new JBoss EAP server to use the XTS configuration.
    * In the `Server` tab, right-click and choose `New` --> `Server`.
-   * Under `Select the server type:`, expand `Red Hat JBoss Middleware` and choose `JBoss Enterprise Application Platform 7.0 (Experimental)`.
+   * Under `Select the server type:`, expand `Red Hat JBoss Middleware` and choose `Red Hat JBoss Enterprise Application Platform 7.x`.
    * For the `Server name`, enter `JBoss EAP XTS Configuration` and click `Next`.
    * In the `Create a new Server Adapter` dialog, choose `Create a new runtime (next page)` and click `Next`.
    * In the `JBoss Runtime` dialog, enter the following information and then click `Finish`.
-   
+
             Name: JBoss EAP XTS Runtime
             Home Directory: (Browse to the server directory and select it)
             Execution Environment: (Choose your runtime JRE if not correct)
             Configuration base directory: (This should already point to your server configuration directory)
             Configuration file: ../../docs/examples/configs/standalone-xts.xml
-3. Start the new `JBoss EAP XTS Configuration` server. 
-4. Right-click on the `jboss-wsat-simple` project, choose `Run As` --> `Maven build`, enter `clean test -Parq-wildfly-remote` for the `Goals:`, and click `Run` to run the Arquillian tests. The test results appear in the console.
+3. Start the new `JBoss EAP XTS Configuration` server.
+4. Right-click on the `wsat-simple` project, choose `Run As` --> `Maven build`, enter `clean verify -Parq-remote` for the `Goals:`, and click `Run` to run the Arquillian tests. The test results appear in the console.
 
 
-Debug the Application
-------------------------------------
+## Debug the Application
 
 If you want to debug the source code of any library in the project, run the following command to pull the source into your local repository. The IDE should then detect it.
 
@@ -166,5 +159,3 @@ If you want to debug the source code of any library in the project, run the foll
 
 
 <!-- Build and Deploy the Quickstart to OpenShift - Coming soon! -->
-
-

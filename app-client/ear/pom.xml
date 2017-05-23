@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     JBoss, Home of Professional Open Source
     Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
@@ -19,13 +19,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.jboss.quickstarts.eap</groupId>
-        <artifactId>jboss-app-client</artifactId>
-        <version>7.1.0-SNAPSHOT</version>
+        <groupId>org.jboss.eap.quickstarts</groupId>
+        <artifactId>app-client</artifactId>
+        <version>7.1.0.Alpha</version>
     </parent>
-    <artifactId>jboss-app-client-ear</artifactId>
+    <artifactId>app-client-ear</artifactId>
     <packaging>ear</packaging>
-    <name>JBoss EAP Quickstart: app-client - ear</name>
+    <name>${qs.name.prefix} app-client - ear</name>
     <description>This project demonstrates how to package and use an EE application client. 
       This is the EAR POM file, which creates the deployable application archive by 
      including the EJB and client application together with the necessary API libraries.</description>
@@ -33,24 +33,24 @@
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <distribution>repo</distribution>
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
     <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>app-client-client-simple</artifactId>
+            <version>${project.version}</version>
+            <type>app-client</type>
+        </dependency>
         <!-- add the EJB and WEB project as dependency to include it in the EAR -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>jboss-app-client-ejb</artifactId>
-            <type>ejb</type>
+            <artifactId>app-client-ejb</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>jboss-app-client-client-simple</artifactId>
-          <version>${project.version}</version>
-          <type>app-client</type>
+            <type>ejb</type>
         </dependency>
     </dependencies>
 
@@ -65,21 +65,21 @@
                 <extensions>true</extensions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-ear-plugin</artifactId>
-                <version>${ear.plugin.version}</version>
                 <configuration>
                     <displayName>SimpleApplicationForApplicationClient</displayName>
-                    <version>6</version>
+                    <version>7</version>
                     <generateApplicationXml>true</generateApplicationXml>
                     <modules>
                         <ejbModule>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>jboss-app-client-ejb</artifactId>
+                            <artifactId>app-client-ejb</artifactId>
                             <bundleFileName>ejb.jar</bundleFileName>
                         </ejbModule>
                         <appClientModule>
                             <groupId>${project.groupId}</groupId>
-                            <artifactId>jboss-app-client-client-simple</artifactId>
+                            <artifactId>app-client-client-simple</artifactId>
                             <bundleFileName>simpleClient.jar</bundleFileName>
                         </appClientModule>
                     </modules>
@@ -92,7 +92,6 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>${version.wildfly.maven.plugin}</version>
                 <configuration>
                     <skip>false</skip>
                 </configuration>

@@ -1,31 +1,28 @@
-jaxrs-client: JAX-RS Client API example
-================================================================
+# jaxrs-client: JAX-RS Client API example
+
 Author: Rafael Benevides  
 Level: Beginner  
 Technologies: JAX-RS  
 Summary: The `jaxrs-client` quickstart demonstrates JAX-RS Client API, which interacts with a JAX-RS Web service that runs on JBoss EAP.  
 Target Product: JBoss EAP  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts>  
+Source: <https://github.com/jbossas/eap-quickstarts/>  
 
 
-What is it?
------------
+## What is it?
 
 The `jaxrs-client` quickstart demonstrates the JAX-RS Client API which interacts with a JAX-RS Web service.
 
 This client "calls" many POST, GET, DELETE operations using different ways: synchronized, asynchronous, delayed and filtered invocations.
 
 
-System requirements
--------------------
+## System Requirements
 
-The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7 or later. 
+The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7.1 or later.
 
-All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.1.1 or later. See [Configure Maven for JBoss EAP 7](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
+All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.2.5 or later. See [Configure Maven for JBoss EAP 7.1](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
 
 
-Start the JBoss EAP Server
--------------------------
+## Start the Server
 
 1. Open a command line and navigate to the root of the  JBoss EAP directory.
 2. The following shows the command line to start the server with the default profile:
@@ -34,34 +31,31 @@ Start the JBoss EAP Server
         For Windows: EAP7_HOME\bin\standalone.bat
 
 
-Build and Deploy the Quickstart
--------------------------
+## Build and Deploy the Quickstart
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command line and navigate to the root directory of this quickstart.
 3. Type this command to build and deploy the archive:
 
         mvn package wildfly:deploy
-4. This will deploy `target/jboss-jaxrs-client.war` to the running instance of the server.
- 
+4. This will deploy `target/jaxrs-client.war` to the running instance of the server.
 
 
-Run the Tests
--------------------------
 
+## Run the Arquillian Tests
 
-This quickstart provides tests that shows the REST Client API features. By default, these tests are configured to be skipped as the tests requires that the application to be deployed first. 
-
+This quickstart provides Arquillian tests. By default, these tests are configured to be skipped as Arquillian tests require the use of a container.
 
 1. Make sure you have started the JBoss EAP server as described above.
-2. Open a command prompt and navigate to the root directory of this quickstart.
+2. Open a command line and navigate to the root directory of this quickstart.
 3. Type the following command to run the test goal with the following profile activated:
 
-        mvn test -Prest-client
+        mvn clean verify -Parq-remote
+
+You can also let Arquillian manage the JBoss EAP server by using the `arq-managed` profile. For more information about how to run the Arquillian tests, see [Run the Arquillian Tests](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/RUN_ARQUILLIAN_TESTS.md#run-the-arquillian-tests).
 
 
-Investigate the Console Output
-----------------------------
+## Investigate the Console Output
 
 
         -------------------------------------------------------
@@ -121,14 +115,13 @@ Investigate the Console Output
         Dec 29, 2014 3:34:46 PM org.jboss.as.quickstarts.jaxrsclient.test.ContactsRestClientTest cruedTest
         INFO: delete a contact by id
         Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.51 sec - in org.jboss.as.quickstarts.jaxrsclient.test.ContactsRestClientTest
-        
+
         Results :
-        
+
         Tests run: 5, Failures: 0, Errors: 0, Skipped: 0
 
 
-Undeploy the Archive
---------------------
+## Undeploy the Archive
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command prompt and navigate to the root directory of this quickstart.
@@ -137,21 +130,17 @@ Undeploy the Archive
         mvn wildfly:undeploy
 
 
-Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
--------------------------------------
+## Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
 
-You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts). 
+You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts).
 
-To run the tests in JBoss Developer Studio, first set the active Maven profile in the project properties to `rest-client`.
+To run the tests in Red Hat JBoss Developer Studio:
 
-Then right click on the project or individual classes and select `Run As` --> `JUnit Test` in the context menu.
+You must first set the active Maven profile in project properties to be either `arq-managed` for running on managed server or `arq-remote` for running on remote server. Then, to run the tests, right click on the project or individual classes and select Run As --> JUnit Test in the context menu.
 
 
-Debug the Application
-------------------------------------
+## Debug the Application
 
 If you want to debug the source code of any library in the project, run the following command to pull the source into your local repository. The IDE should then detect it.
 
     mvn dependency:sources
-   
-

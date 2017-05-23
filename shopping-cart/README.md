@@ -1,16 +1,15 @@
-shopping-cart: EJB Stateful Session Bean (SFSB) Example 
-=====================================
+# shopping-cart: EJB Stateful Session Bean (SFSB) Example
+
 Author: Serge Pagop  
 Level: Intermediate  
 Technologies: SFSB EJB  
 Summary: The `shopping-cart` quickstart demonstrates how to deploy and run a simple Java EE 7 shopping cart application that uses a stateful session bean (SFSB).   
 Target Product: JBoss EAP  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts/>  
+Source: <https://github.com/jbossas/eap-quickstarts/>  
 
-What is it?
------------
+## What is it?
 
-The `shopping-cart` quickstart demonstrates how to deploy and run a simple Java EE 7 application that uses a stateful session bean (SFSB) in Red Hat JBoss Enterprise Application Platform. The application allows customers to buy, checkout, and view their cart contents. 
+The `shopping-cart` quickstart demonstrates how to deploy and run a simple Java EE 7 application that uses a stateful session bean (SFSB) in Red Hat JBoss Enterprise Application Platform. The application allows customers to buy, checkout, and view their cart contents.
 
 The `shopping-cart` application consists of the following:
 
@@ -22,25 +21,22 @@ The `shopping-cart` application consists of the following:
     This simple Java client is launched using a `main` method. The remote client looks up a reference to the server module's API, via JNDI. It then uses this API to perform the operations the customer requests.
 
 
-System requirements
--------------------
+## System Requirements
 
-The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7 or later. 
+The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7.1 or later.
 
-All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.1.1 or later. See [Configure Maven for JBoss EAP 7](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
+All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.2.5 or later. See [Configure Maven for JBoss EAP 7.1](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
 
 
-Use of EAP7_HOME
----------------
+## Use of EAP7_HOME
 
 In the following instructions, replace `EAP7_HOME` with the actual path to your JBoss EAP installation. The installation path is described in detail here: [Use of EAP7_HOME and JBOSS_HOME Variables](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_OF_EAP7_HOME.md#use-of-eap_home-and-jboss_home-variables).
 
 
-Configure the JBoss EAP Server
----------------------------
+## Configure the Server
 
 This example quickstart purposely throws a `NoSuchEJBException` exception when the shopping cart is empty. This is the expected result because method is annotated with `@Remove`. This means the next invocation after the shopping cart checkout fails because the container has destroyed the instance and it is no longer available. If you do not run this script, you see the following ERROR in the server log, followed by the stacktrace
-  
+
     ERROR [org.jboss.as.ejb3.invocation] (EJB default - 7) WFLYEJB0034: EJB Invocation failed on component ShoppingCartBean for method public abstract java.util.Map org.jboss.as.quickstarts.sfsb.ShoppingCart.getCartContents(): javax.ejb.NoSuchEJBException: WFLYEJB0168: Could not find EJB with id UnknownSessionID [5168576665505352655054705267485457555457535250485552546568575254]
 
 Follow the steps below to suppress system exception logging.
@@ -49,7 +45,7 @@ Follow the steps below to suppress system exception logging.
     * If it is running, stop the JBoss EAP server.
     * Backup the file: `EAP7_HOME/standalone/configuration/standalone.xml`
     * After you have completed testing this quickstart, you can replace this file to restore the server to its original configuration.
-2. Start the JBoss EAP server by typing the following: 
+2. Start the JBoss EAP server by typing the following:
 
         For Linux:  EAP7_HOME/bin/standalone.sh
         For Windows:  EAP7_HOME\bin\standalone.bat
@@ -59,14 +55,13 @@ Follow the steps below to suppress system exception logging.
 
         For Linux: EAP7_HOME/bin/jboss-cli.sh --connect --file=configure-system-exception.cli
         For Windows: EAP7_HOME\bin\jboss-cli.bat --connect --file=configure-system-exception.cli
-   You should see the following result when you run the script:
+    You should see the following result when you run the script:
 
         The batch executed successfully
 5. Stop the JBoss EAP server.
 
 
-Review the Modified Server Configuration
------------------------------------
+## Review the Modified Server Configuration
 
 After stopping the server, open the `EAP7_HOME/standalone/configuration/standalone.xml` file and review the changes.
 
@@ -75,8 +70,7 @@ You should see the following configuration in the `ejb3` subsystem.
       <log-system-exceptions value="false"/>
 
 
-Start the JBoss EAP Server
--------------------------
+## Start the Server
 
 1. Open a command prompt and navigate to the root of the JBoss EAP directory.
 2. The following shows the command line to start the server:
@@ -84,52 +78,55 @@ Start the JBoss EAP Server
         For Linux:   EAP7_HOME/bin/standalone.sh
         For Windows: EAP7_HOME\bin\standalone.bat
 
- 
-Build and Deploy the Quickstart
--------------------------
+
+## Build and Deploy the Quickstart
 
 1. Make sure you have started the JBoss EAP server. See the instructions in the previous section.
 
 2. Open a command prompt and navigate to the `shopping-cart` quickstart directory
 3. To build both the server component and the remote client program, deploy the server module, change into the examples shopping-cart directory and type the following:
 
-        mvn clean install wildfly:deploy 
-4. This Maven goal will deploy `server/target/jboss-shopping-cart-server.jar`. You can check the server console to see information messages regarding the deployment.
+        mvn clean install wildfly:deploy
+4. This Maven goal will deploy `server/target/shopping-cart-server.jar`. You can check the server console to see information messages regarding the deployment.
 
-        INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-2) WFLYEJB0473: JNDI bindings for session bean named 'ShoppingCartBean' in deployment unit 'deployment "jboss-shopping-cart-server.jar"' are as follows:
+        INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-2) WFLYEJB0473: JNDI bindings for session bean named 'ShoppingCartBean' in deployment unit 'deployment "shopping-cart-server.jar"' are as follows:
 
-          java:global/jboss-shopping-cart-server/ShoppingCartBean!org.jboss.as.quickstarts.sfsb.ShoppingCart
-          java:app/jboss-shopping-cart-server/ShoppingCartBean!org.jboss.as.quickstarts.sfsb.ShoppingCart
+          java:global/shopping-cart-server/ShoppingCartBean!org.jboss.as.quickstarts.sfsb.ShoppingCart
+          java:app/shopping-cart-server/ShoppingCartBean!org.jboss.as.quickstarts.sfsb.ShoppingCart
           java:module/ShoppingCartBean!org.jboss.as.quickstarts.sfsb.ShoppingCart
-          java:jboss/exported/jboss-shopping-cart-server/ShoppingCartBean!org.jboss.as.quickstarts.sfsb.ShoppingCart
-          java:global/jboss-shopping-cart-server/ShoppingCartBean
-          java:app/jboss-shopping-cart-server/ShoppingCartBean
+          java:jboss/exported/shopping-cart-server/ShoppingCartBean!org.jboss.as.quickstarts.sfsb.ShoppingCart
+          java:global/shopping-cart-server/ShoppingCartBean
+          java:app/shopping-cart-server/ShoppingCartBean
           java:module/ShoppingCartBean
 
-        INFO  [org.jboss.weld.deployer] (MSC service thread 1-4) WFLYWELD0006: Starting Services for CDI deployment: jboss-shopping-cart-server.jar
-        INFO  [org.jboss.weld.deployer] (MSC service thread 1-8) WFLYWELD0009: Starting weld service for deployment jboss-shopping-cart-server.jar
-        INFO  [org.jboss.as.server] (management-handler-thread - 3) WFLYSRV0010: Deployed "jboss-shopping-cart-server.jar" (runtime-name : "jboss-shopping-cart-server.jar")
+        INFO  [org.jboss.weld.deployer] (MSC service thread 1-4) WFLYWELD0006: Starting Services for CDI deployment: shopping-cart-server.jar
+        INFO  [org.jboss.weld.deployer] (MSC service thread 1-8) WFLYWELD0009: Starting weld service for deployment shopping-cart-server.jar
+        INFO  [org.jboss.as.server] (management-handler-thread - 3) WFLYSRV0010: Deployed "shopping-cart-server.jar" (runtime-name : "shopping-cart-server.jar")
 
 
-Run the Client Application
-------------------------
+## Run the Client Application
 
-Now start a client that will access the beans you just deployed. 
+Now start a client that will access the beans you just deployed.
 
 You can use the command prompt from the previous step or open a new one and navigate to the root of the `shopping-cart` quickstart directory.
 
 Type the following command:
 
-        mvn exec:java -f client/pom.xml 
+        mvn exec:java -f client/pom.xml         
 
-Investigate the Console Output
--------------------------------
+__Note__: This quickstart requires `quickstart-parent` artifact to be installed in your local Maven repository.
+To install it, navigate to quickstarts project root directory and run the following command:
 
-You should see the following: 
+        mvn clean install
+
+
+## Investigate the Console Output
+
+You should see the following:
 
 1. The client sends a remote method invocation to the stateful session bean to buy two `32 GB USB 2.0 Flash Drive` and one `Wireless Ergonomic Keyboard and Mouse`.
 2. The client sends a remote method invocation to get the contents of the cart and prints it to the console.
-3. The client sends a remote method invocation to invoke checkout. Note the `checkout()` method in the server `ShoppingCartBean` has the `@Remove` annotation. This means the container will destroy shopping cart after the call and it will no longer be available. 
+3. The client sends a remote method invocation to invoke checkout. Note the `checkout()` method in the server `ShoppingCartBean` has the `@Remove` annotation. This means the container will destroy shopping cart after the call and it will no longer be available.
 4. The client calls `getCartContents()` to make sure the shopping cart was removed after checkout. This results in a `javax.ejb.NoSuchEJBException` trace in the server, proving the cart was removed.
 
 On the client console, you should see output similar to:
@@ -139,29 +136,28 @@ On the client console, you should see output similar to:
     Buying a "32 GB USB 2.0 Flash Drive".
     Buying another "32 GB USB 2.0 Flash Drive".
     Buying a "Wireless Ergonomic Keyboard and Mouse"
-    
+
     Print cart:
     1     Wireless Ergonomic Keyboard and Mouse
     2     32 GB USB 2.0 Flash Drive
-    
+
     Checkout
     Cart was correctly removed, as expected, after Checkout
     &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 
-On the server log, you should see:
+In the server log, you should see:
 
     INFO  [stdout] (pool-9-thread-8) implementing checkout() left as exercise for the reader!
 
 
-Restore the Server Configuration
-----------------------------
+## Restore the Server Configuration
 
-You can restore the system exception configuration by running the `restore-system-exception.cli` script provided in the root directory of this quickstart or by manually restoring the back-up copy the configuration file. 
+You can restore the system exception configuration by running the `restore-system-exception.cli` script provided in the root directory of this quickstart or by manually restoring the back-up copy the configuration file.
 
 ### Restore the Server Configuration by Running the JBoss CLI Script
 
-1. Start the JBoss EAP server by typing the following: 
+1. Start the JBoss EAP server by typing the following:
 
         For Linux:  EAP7_HOME/bin/standalone.sh
         For Windows:  EAP7_HOME\bin\standalone.bat
@@ -178,9 +174,7 @@ You can restore the system exception configuration by running the `restore-syste
 2. Replace the `EAP7_HOME/standalone/configuration/standalone.xml` file with the back-up copy of the file.
 
 
-
-Undeploy the Archive
---------------------
+## Undeploy the Archive
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command prompt and navigate to the root directory of this quickstart.
@@ -189,21 +183,18 @@ Undeploy the Archive
         mvn wildfly:undeploy
 
 
-Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
--------------------------------------
-You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts). 
+## Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
+You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts).
 
 This quickstart consists of multiple projects, so it deploys and runs differently in JBoss Developer Studio than the other quickstarts.
 
-* Be sure to configure JBoss EAP to suppress system exception logging as described above under [Configure the JBoss EAP Server](#configure-the-jboss-eap-server). Stop the server at the end of that step.
-* To deploy the server project, right-click on the `jboss-shopping-cart-server` project and choose `Run As` --> `Run on Server`.
-* To run the client, right-click on the `jboss-shopping-cart-client` project and choose `Run As` --> `Java Application`. In the `Select Java Application` window, choose `Client - org.jboss.as.quickstarts.client` and click `OK`. The client output displays in the `Console` window.
+* Be sure to configure JBoss EAP to suppress system exception logging as described above under [Configure the Server](#configure-the-server). Stop the server at the end of that step.
+* To deploy the server project, right-click on the `shopping-cart-server` project and choose `Run As` --> `Run on Server`.
+* To run the client, right-click on the `shopping-cart-client` project and choose `Run As` --> `Java Application`. In the `Select Java Application` window, choose `Client - org.jboss.as.quickstarts.client` and click `OK`. The client output displays in the `Console` window.
 * Be sure to [Restore the Server Configuration](#restore-the-server-configuration) when you have completed testing this quickstart.
 
-Debug the Application
----------------------
+## Debug the Application
 
 If you want to debug the source code of any library in the project, run the following command to pull the source into your local repository. The IDE should then detect it.
 
         mvn dependency:sources
-

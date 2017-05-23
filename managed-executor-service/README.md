@@ -1,36 +1,35 @@
-managed-executor-service: Managed Executor Service example
-================================================================
+# managed-executor-service: Managed Executor Service example
+
 Author: Rafael Benevides  
 Level: Beginner  
 Technologies: EE Concurrency Utilities, JAX-RS, JAX-RS Client API  
 Summary: The `managed-executor-service` quickstart demonstrates how Java EE applications can submit tasks for asynchronous execution.  
 Target Product: JBoss EAP  
-Source: <https://github.com/jboss-developer/jboss-eap-quickstarts>  
+Source: <https://github.com/jbossas/eap-quickstarts/>  
 
 
-What is it?
------------
+## What is it?
 
 The Managed Executor Service (javax.enterprise.concurrent.ManagedExecutorService) allows Java EE applications to submit tasks for asynchronous execution. It is an extension of Java SE's Executor Service (java.util.concurrent.ExecutorService) adapted to the Java EE platform requirements.
 
 Managed Executor Service instances are managed by the application server, thus Java EE applications are forbidden to invoke any lifecycle related method.
 
-A JAX-RS resource provides access to some operations that are executed asynchronously. 
+A JAX-RS resource provides access to some operations that are executed asynchronously.
 
-_Note: This quickstart uses the H2 database included with Red Hat JBoss Enterprise Application Platform 7. It is a lightweight, relational example datasource that is used for examples only. It is not robust or scalable, is not supported, and should NOT be used in a production environment!_
+This quickstart does not contain any user interface. The tests must be run to verify everything is working correctly.
+
+_Note: This quickstart uses the H2 database included with Red Hat JBoss Enterprise Application Platform 7.1. It is a lightweight, relational example datasource that is used for examples only. It is not robust or scalable, is not supported, and should NOT be used in a production environment!_
 
 _Note: This quickstart uses a `*-ds.xml` datasource configuration file for convenience and ease of database configuration. These files are deprecated in JBoss EAP and should not be used in a production environment. Instead, you should configure the datasource using the Management CLI or Management Console. Datasource configuration is documented in the [Configuration Guide](https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/) for Red Hat JBoss Enterprise Application Platform._
 
-System requirements
--------------------
+## System Requirements
 
-The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7 or later. 
+The application this project produces is designed to be run on Red Hat JBoss Enterprise Application Platform 7.1 or later.
 
-All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.1.1 or later. See [Configure Maven for JBoss EAP 7](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
+All you need to build this project is Java 8.0 (Java SDK 1.8) or later and Maven 3.2.5 or later. See [Configure Maven for JBoss EAP 7.1](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_MAVEN_JBOSS_EAP7.md#configure-maven-to-build-and-deploy-the-quickstarts) to make sure you are configured correctly for testing the quickstarts.
 
 
-Start the JBoss EAP Server
--------------------------
+## Start the Server
 
 1. Open a command line and navigate to the root of the  JBoss EAP directory.
 2. The following shows the command line to start the server with the default profile:
@@ -39,61 +38,45 @@ Start the JBoss EAP Server
         For Windows: EAP7_HOME\bin\standalone.bat
 
 
-Build and Deploy the Quickstart
--------------------------
+## Run the Arquillian Tests
+
+This quickstart provides Arquillian tests. By default, these tests are configured to be skipped as Arquillian tests require the use of a container.
 
 1. Make sure you have started the JBoss EAP server as described above.
 2. Open a command line and navigate to the root directory of this quickstart.
-3. Type this command to build and deploy the archive:
-
-        mvn clean package wildfly:deploy
-4. This will deploy `target/jboss-managed-executor-service.war` to the running instance of the server.
- 
-
-
-Run the Tests
--------------------------
-
-
-This quickstart provides tests that shows how the asynchronous tasks are executed. By default, these tests are configured to be skipped as the tests requires that the application to be deployed first. 
-
-
-1. Make sure you have started the JBoss EAP server as described above.
-2. Open a command prompt and navigate to the root directory of this quickstart.
 3. Type the following command to run the test goal with the following profile activated:
 
-        mvn clean test -Prest-test
+        mvn clean verify -Parq-remote
 
-Run tests from JBDS
------------------------
-
-To run the tests in JBoss Developer Studio, first set the active Maven profile in the project properties to `rest-test`.
-
-To run the tests, right click on the project or individual classes and select Run As --> JUnit Test in the context menu.
+You can also let Arquillian manage the JBoss EAP server by using the `arq-managed` profile. For more information about how to run the Arquillian tests, see [Run the Arquillian Tests](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/RUN_ARQUILLIAN_TESTS.md#run-the-arquillian-tests).
 
 
-Investigate the Console Output
-------------------------------
-
+## Investigate the Console Output
 
     -------------------------------------------------------
      T E S T S
     -------------------------------------------------------
-    Running org.jboss.as.quickstarts.managedexecutorservice.test.ProductsRestClientTest
-    [timestamp] org.jboss.as.quickstarts.managedexecutorservice.test.ProductsRestClientTest testRestResources
+    Running org.jboss.as.quickstarts.managedexecutorservice.test.ProductsRestClientIT
+    feb. 22, 2017 4:22:22 PM org.xnio.Xnio <clinit>
+    INFO: XNIO version 3.3.4.Final
+    feb. 22, 2017 4:22:22 PM org.xnio.nio.NioXnio <clinit>
+    INFO: XNIO NIO Implementation Version 3.3.4.Final
+    feb. 22, 2017 4:22:22 PM org.jboss.remoting3.EndpointImpl <clinit>
+    INFO: JBoss Remoting version 4.0.18.Final
+    feb. 22, 2017 4:22:23 PM org.jboss.as.quickstarts.managedexecutorservice.test.ProductsRestClientIT testRestResources
     INFO: creating a new product
-    [timestamp] org.jboss.as.quickstarts.managedexecutorservice.test.ProductsRestClientTest testRestResources
+    feb. 22, 2017 4:22:23 PM org.jboss.as.quickstarts.managedexecutorservice.test.ProductsRestClientIT testRestResources
     INFO: Product created. Executing a long running task
-    [timestamp] org.jboss.as.quickstarts.managedexecutorservice.test.ProductsRestClientTest testRestResources
+    feb. 22, 2017 4:22:26 PM org.jboss.as.quickstarts.managedexecutorservice.test.ProductsRestClientIT testRestResources
     INFO: Deleting all products
-    Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.202 sec - in org.jboss.as.quickstarts.managedexecutorservice.test.ProductsRestClientTest
-    
+    Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.619 sec - in org.jboss.as.quickstarts.managedexecutorservice.test.ProductsRestClientIT
+
     Results :
-    
+
     Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
-    
-Investigate the Server Console Output
--------------------------------------
+
+## Investigate the Server Console Output
+
 Look at the JBoss EAP console or Server log and you should see log messages like the following:
 
     13:34:07,940 INFO  [ProductResourceRESTService] (default task-51) Will create a new Product on other Thread
@@ -122,10 +105,9 @@ Look at the JBoss EAP console or Server log and you should see log messages like
     13:34:11,092 INFO  [DeleteTask] (EE-ManagedExecutorService-default-Thread-5) Commit transaction. Products deleted: 1
 
 Note that the PersistTask and DeleteTask were executed after ProductResourceRESTService sends a Response. The only exception is for LongRunningTask where ProductResourceRESTService waits for its response.
-    
 
-Server Log: Expected warnings and errors
------------------------------------
+
+## Server Log: Expected Warnings and Errors
 
 _Note:_ You will see the following warnings in the server log. You can ignore these warnings.
 
@@ -134,27 +116,17 @@ _Note:_ You will see the following warnings in the server log. You can ignore th
     HHH000431: Unable to determine H2 database version, certain features may not work
 
 
-Undeploy the Archive
---------------------
+## Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
 
-1. Make sure you have started the JBoss EAP server as described above.
-2. Open a command prompt and navigate to the root directory of this quickstart.
-3. When you are finished testing, type this command to undeploy the archive:
+You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts).
 
-        mvn wildfly:undeploy
+To run the tests in Red Hat JBoss Developer Studio:
 
-
-Run the Quickstart in Red Hat JBoss Developer Studio or Eclipse
--------------------------------------
-
-You can also start the server and deploy the quickstarts or run the Arquillian tests from Eclipse using JBoss tools. For general information about how to import a quickstart, add a JBoss EAP server, and build and deploy a quickstart, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/USE_JBDS.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts). 
+You must first set the active Maven profile in project properties to be either `arq-managed` for running on managed server or `arq-remote` for running on remote server. Then, to run the tests, right click on the project or individual classes and select Run As --> JUnit Test in the context menu.
 
 
-Debug the Application
-------------------------------------
+## Debug the Application
 
 If you want to debug the source code of any library in the project, run the following command to pull the source into your local repository. The IDE should then detect it.
 
     mvn dependency:sources
-   
-

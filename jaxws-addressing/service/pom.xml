@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     JBoss, Home of Professional Open Source
     Copyright 2015, Red Hat, Inc. and/or its affiliates, and individual
@@ -19,36 +19,27 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-      <groupId>org.jboss.quickstarts.eap</groupId>
-      <artifactId>jboss-jaxws-addressing</artifactId>
-      <version>7.1.0-SNAPSHOT</version>
+        <groupId>org.jboss.eap.quickstarts</groupId>
+        <artifactId>jaxws-addressing</artifactId>
+        <version>7.1.0.Alpha</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>jboss-jaxws-addressing-service</artifactId>
+    <artifactId>jaxws-addressing-service</artifactId>
     <packaging>war</packaging>
-    <name>JBoss EAP Quickstart: jaxws-addressing - service</name>
+    <name>${qs.name.prefix} jaxws-addressing - service</name>
     <description>This project is a working example of a JAX-WS web service addressing endpoint; this is the service POM file</description>
-    <url>http://www.jboss.org/products/eap</url>
-
-    <licenses>
-      <license>
-         <name>Apache License, Version 2.0</name>
-         <distribution>repo</distribution>
-         <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-      </license>
-   </licenses>
 
     <build>
-       <!-- Set the name for the deployable archive instead of using the default name with the version -->
-       <finalName>${project.artifactId}</finalName>
-       <sourceDirectory>src/main/java</sourceDirectory>
+        <!-- Set the name for the deployable archive instead of using the default name with the version -->
+        <finalName>${project.artifactId}</finalName>
 
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>${version.war.plugin}</version>
                 <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
                     <attachClasses>true</attachClasses>
+                    <classesClassifier>classes</classesClassifier>
                 </configuration>
             </plugin>
 
@@ -56,9 +47,8 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>${version.wildfly.maven.plugin}</version>
                 <configuration>
-                   <skip>false</skip>
+                    <skip>false</skip>
                 </configuration>
             </plugin>
         </plugins>
